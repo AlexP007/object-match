@@ -19,7 +19,7 @@ $m = Object::Match->new(
 # Test success match
 
 $expected = 1;
-$result = $m->match('word ');
+$result = $m->match('word ')->success;
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -31,7 +31,7 @@ ok($result == $expected,
 # Test failed match
 
 $expected = 0;
-$result = $m->match('word');
+$result = $m->match('word')->success;
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
