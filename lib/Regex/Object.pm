@@ -24,12 +24,12 @@ sub match {
     my @matches = $string =~ $self->regex;
 
     return Regex::Object::Match->new(
-        matches   => \@matches,
-        names     => { %nc },
-        names_a   => { %nca },
         prematch  => $PREMATCH,
         match     => $MATCH,
         postmatch => $POSTMATCH,
+        captures  => \@matches,
+        names     => { %nc },
+        names_a   => { %nca },
     );
 }
 

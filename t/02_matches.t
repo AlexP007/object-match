@@ -19,7 +19,7 @@ $re = Regex::Object->new(
 # Test 3 groups match
 
 $expected = 3;
-$result = scalar @{ $re->match('gr1 gr2 gr3')->matches };
+$result = scalar @{ $re->match('gr1 gr2 gr3')->captures };
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -31,7 +31,7 @@ ok($result == $expected,
 # Test 0 groups match
 
 $expected = 0;
-$result = scalar @{ $re->match('gr1 ngr2 gr3')->matches };
+$result = scalar @{ $re->match('gr1 ngr2 gr3')->captures };
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
