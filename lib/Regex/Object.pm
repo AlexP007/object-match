@@ -21,13 +21,13 @@ has regex => (
 sub match {
     my ($self, $string) = @_;
 
-    my @matches = $string =~ $self->regex;
+    my @captures = $string =~ $self->regex;
 
     return Regex::Object::Match->new(
         prematch  => $PREMATCH,
         match     => $MATCH,
         postmatch => $POSTMATCH,
-        captures  => \@matches,
+        captures  => \@captures,
         names     => { %nc },
         names_a   => { %nca },
     );
