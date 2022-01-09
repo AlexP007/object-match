@@ -1,4 +1,4 @@
-package Regex::Object::Result;
+package Regex::Object::Match;
 
 use 5.20.0;
 use strict;

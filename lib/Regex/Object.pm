@@ -23,7 +23,7 @@ sub match {
 
     my @matches = $string =~ $self->regex;
 
-    return Regex::Object::Result->new(
+    return Regex::Object::Match->new(
         matches   => \@matches,
         names     => { %nc },
         names_a   => { %nca },
