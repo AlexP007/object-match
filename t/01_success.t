@@ -25,7 +25,8 @@ ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
         $result,
         $expected,
-    ));
+    )
+);
 
 ## TEST 2
 # Test failed match
@@ -37,4 +38,5 @@ ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
         $result,
         $expected,
-    ));
+    )
+);
