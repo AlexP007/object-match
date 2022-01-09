@@ -1,10 +1,10 @@
 package Object::Match;
 
 use strict;
-use warnings qw/FATAL/;
+use warnings qw(FATAL);
 use utf8;
 
-use Carp;
+use Object::Match::Result;
 use Moo;
 use namespace::clean;
 
@@ -16,28 +16,16 @@ has regex => (
     required => 1,
 );
 
-has matches => (
-    is => 'rwp',
-);
-
-has names => (
-    is => 'rwp',
-);
-
-has names_a => (
-    is => 'rwp',
-);
-
 sub match {
     my ($self, $string) = @_;
 
     my @matches = $string =~ $self->regex;
 
-    $self->_set_matches(\@matches);
-    $self->_set_names({ %nc } );
-    $self->_set_names_a( { %nca } );
-
-    return scalar @matches;
+    return Object::Match::Result->new(
+        matches => \@matches,
+        names   => { %nc },
+        names_a => { %nca },
+    );
 }
 
 1;
