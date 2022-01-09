@@ -1,4 +1,4 @@
-package Object::Match;
+package Regex::Object;
 
 use 5.20.0;
 use strict;
@@ -6,7 +6,7 @@ use warnings qw(FATAL);
 use utf8;
 use English;
 
-use Object::Match::Result;
+use Regex::Object::Result;
 use Moo;
 use namespace::clean;
 
@@ -23,7 +23,7 @@ sub match {
 
     my @matches = $string =~ $self->regex;
 
-    return Object::Match::Result->new(
+    return Regex::Object::Result->new(
         matches   => \@matches,
         names     => { %nc },
         names_a   => { %nca },
