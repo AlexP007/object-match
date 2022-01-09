@@ -6,7 +6,7 @@ use warnings qw(FATAL);
 use utf8;
 use English;
 
-use Regex::Object::Result;
+use Regex::Object::Match;
 use Moo;
 use namespace::clean;
 
