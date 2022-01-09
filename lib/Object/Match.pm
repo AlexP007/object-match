@@ -1,8 +1,10 @@
 package Object::Match;
 
+use 5.20.0;
 use strict;
 use warnings qw(FATAL);
 use utf8;
+use English;
 
 use Object::Match::Result;
 use Moo;
@@ -22,9 +24,12 @@ sub match {
     my @matches = $string =~ $self->regex;
 
     return Object::Match::Result->new(
-        matches => \@matches,
-        names   => { %nc },
-        names_a => { %nca },
+        matches   => \@matches,
+        names     => { %nc },
+        names_a   => { %nca },
+        prematch  => $PREMATCH,
+        match     => $MATCH,
+        postmatch => $POSTMATCH,
     );
 }
 

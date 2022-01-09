@@ -1,5 +1,6 @@
 package Object::Match::Result;
 
+use 5.20.0;
 use strict;
 use warnings qw(FATAL);
 use utf8;
@@ -7,7 +8,7 @@ use utf8;
 use Moo;
 use namespace::clean;
 
-has [qw(matches names names_a)] => (
+has [qw(matches names names_a prematch match postmatch)] => (
     is       => 'ro',
     required => 1,
 );
