@@ -40,7 +40,7 @@ sub match {
 
 __END__
 
-# ABSTRACT: Regex object that solves problems with global variables side effects.
+# ABSTRACT: solves problems with global Regex variables side effects.
 
 =pod
 
@@ -48,13 +48,14 @@ __END__
 
 =head1 NAME
 
-Regex::Object - Regex object that solves problems with global variables side effects.
+Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
 version 1.00
 
 =head1 SYNOPSIS
+
     use Regex::Object;
 
     my $re = Regex::Object->new(regex  => qr/^\w{3}$/); # regex to match 3 letters words
@@ -115,5 +116,77 @@ Returns regex that was passed to constructor earlier.
 Execute regex matching and returns Regex::Object::Match result DTO.
 
 =head2 Regex::Object::Match METHODS
+
+=head3 success()
+
+    my $is_success = $result->success;
+
+Returns 1 if match succeeded or '' if not.
+
+=head3 prematch()
+
+Returns string preceding whatever was matched by the last successful pattern match.
+$` equivalent.
+
+    my $prematch = $result->prematch;
+
+=head3 match()
+
+Returns string matched by the last successful pattern match.
+$& equivalent
+
+    my $match = $result->match;
+
+=head3 postmatch()
+
+Returns string following whatever was matched by the last successful pattern match.
+$' equivalent.
+
+    my $postmatch = $result->postmatch;
+
+=head3 last_paren_match()
+
+Returns string matched by the highest used capture group of the last successful search pattern.
+$+ equivalent.
+
+    my $last_paren_match = $result->last_paren_match;
+
+=head3 captures()
+
+Returns array ref contains of ($1, $2 ...) capture groups values.
+
+    my $first_group = $result->captures->[0];
+
+=head3 named_captures()
+
+Returns hash ref of the named captures.
+%+ equivalent.
+
+    my $name = $result->named_captures->{name};
+
+=head3 named_captures_all()
+
+Returns hash ref of the named captures all.
+%- equivalent.
+
+    my $names_array_ref = $result->named_captures_all->{name};
+
+=head1 BUGS AND LIMITATIONS
+
+If you find one, please let me know.
+
+=head1 SOURCE CODE REPOSITORY
+
+https://github.com/AlexP007/regex-object - fork or add pr.
+
+=head1 AUTHOR
+
+Alexander Panteleev <alexpan at cpan dot org>.
+
+=head1 LICENSE AND COPYRIGHT
+
+This software is copyright (c) 2022 by Alexander Panteleev.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
