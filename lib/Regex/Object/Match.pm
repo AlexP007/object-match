@@ -25,3 +25,5 @@ sub BUILD {
 }
 
 1;
+
+__END__
