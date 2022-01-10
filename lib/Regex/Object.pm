@@ -177,7 +177,7 @@ If you find one, please let me know.
 
 =head1 SOURCE CODE REPOSITORY
 
-https://github.com/AlexP007/regex-object - fork or add pr.
+L<https://github.com/AlexP007/regex-object|https://github.com/AlexP007/regex-object> - fork or add pr.
 
 =head1 AUTHOR
 
