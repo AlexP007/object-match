@@ -62,4 +62,3 @@ $result = $re->match('full expression')->match;
 ok(!$result,
     'Returns wrong value: string, expected: undef'
 );
-
