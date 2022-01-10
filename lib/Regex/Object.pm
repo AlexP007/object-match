@@ -17,7 +17,6 @@ tie my %nca, "Tie::Hash::NamedCapture", all => 1;
 
 has regex => (
     is       => 'ro',
-    required => 1,
 );
 
 sub match {
