@@ -27,6 +27,7 @@ sub match {
         prematch           => $PREMATCH,
         match              => $MATCH,
         postmatch          => $POSTMATCH,
+        last_paren_match   => $LAST_PAREN_MATCH,
         captures           => \@captures,
         named_captures     => { %nc },
         named_captures_all => { %nca },

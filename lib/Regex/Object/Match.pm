@@ -8,7 +8,7 @@ use utf8;
 use Moo;
 use namespace::clean;
 
-has [qw(prematch match          postmatch
+has [qw(prematch match postmatch last_paren_match
         captures named_captures named_captures_all)
 ] => (
     is       => 'ro',
