@@ -2,13 +2,13 @@ use strict;
 use warnings qw/FATAL/;
 use utf8;
 
-use Test::Simple tests => 4;
+use Test::Simple tests => 5;
 use Regex::Object;
 
 $|=1;
 
 # vars
-my ($re, $expected, $result);
+my ($re, $expected, $result, @result);
 
 # Initial
 $re = Regex::Object->new(
@@ -61,4 +61,22 @@ $result = $re->match('full expression')->match;
 
 ok(!$result,
     'Returns wrong value: string, expected: undef'
+);
+
+## TEST 5
+# Test global matching
+
+$expected = 'John Doe Eric Lide Hans Zimmermann';
+
+while ($expected =~ /(?<name>\w+?) (?<surname>\w+)/g) {
+    push @result, @{ $re->collect->captures };
+}
+
+$result = join "\040", @result;
+
+ok($result eq $expected,
+    sprintf('Returns wrong value: %s, expected: %s',
+        $result,
+        $expected,
+    )
 );
