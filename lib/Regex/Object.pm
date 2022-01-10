@@ -10,7 +10,7 @@ use Regex::Object::Match;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '1.00';
+our $VERSION = '1.10';
 
 tie my %nc, "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
@@ -52,7 +52,7 @@ Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
-version 1.00
+version 1.10
 
 =head1 SYNOPSIS
 
