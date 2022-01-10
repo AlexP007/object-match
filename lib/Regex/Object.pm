@@ -23,7 +23,13 @@ has regex => (
 sub match {
     my ($self, $string) = @_;
 
-    my @captures = $string =~ $self->regex;
+    $string =~ $self->regex;
+
+    return $self->collect;
+}
+
+sub collect {
+    my @captures = map {no strict 'refs'; $$_} 1 .. $#-;
 
     return Regex::Object::Match->new(
         prematch           => $PREMATCH,
