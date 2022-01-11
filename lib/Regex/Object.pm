@@ -110,9 +110,13 @@ The Regex::Object supports two approaches:
 
 =over 4
 
-=item qr// regex passed to constructor, so these modifiers could be used: m,s,i,x,xx,p,a,d,l,u,n.
+=item object scoped regex
 
-=item collecting regex result vars from global match expression, (nothing passed to constructor).
+qr// regex passed to constructor, so these modifiers could be used: m,s,i,x,xx,p,a,d,l,u,n.
+
+=item global regex
+
+collecting regex result vars from global match expression, (nothing passed to constructor).
 
 =back
 
@@ -125,7 +129,7 @@ More about Perl Regex: L<perlre|https://perldoc.perl.org/perlre>.
     my $re = Regex::Object->new(regex  => qr/^\w{3}$/); # scoped qr regex
     my $re = Regex::Object->new; # to work with global match expression
 
-Constructor: accept one parameter - qr// regex and returns new instance.
+Constructor: accept one optional parameter - qr// regex and returns new instance.
 
 =head3 regex()
 
