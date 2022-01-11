@@ -12,18 +12,17 @@ use namespace::clean;
 
 our $VERSION = '1.10';
 
-tie my %nc, "Tie::Hash::NamedCapture";
+tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
 
 has regex => (
-    is       => 'ro',
+    is => 'ro',
 );
 
 sub match {
     my ($self, $string) = @_;
 
     $string =~ $self->regex;
-
     return $self->collect;
 }
 
