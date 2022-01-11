@@ -1,0 +1,3 @@
+1.10     2022-01-11 14:52:35-04:00 Europe/Moscow
+       - Regex::Object constructor regex parameter no longer required
+       - Implement Regex::Object->collect method that works with global vars
