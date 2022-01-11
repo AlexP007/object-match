@@ -69,13 +69,13 @@ version 1.10
     print "matched\n" if $re->match('fooz')->success; # nothing
 
     ######## ---- ########
+    # The main goal - both results have different named captured hashes
 
     $re = Regex::Object->new(regex  => qr/(?<name>\w+?) (?<surname>\w+)/); # named captures
 
     my $result1 = $re->match('John Doe');
     my $result2 = $re->match('Fill Anselmo');
 
-    # The main goal - both results have different named captured hashes
     if ($result2->success) {
         my $name    = $result2->named_captures->{name};
         my $surname = $result2->named_captures->{surname};
@@ -90,13 +90,31 @@ version 1.10
         print "Name: $name; Surname: $surname\n";
     }
 
+    ######## ---- ########
+    # Works with match regex
+
+    my $re = Regex::Object->new;
+    my @matches;
+
+    while ('John Doe Eric Lide Hans Zimmermann' =~ /(?<name>\w+?) (?<surname>\w+)/g) {
+        my $match = $re->collect;
+        push @matches, $match;
+    }
+
 =head1 DESCRIPTION
 
 This module was created for one certain goal: give you a level
 of isolation from perlre global variables.
 
-The Regex::Object supports qr// regex, so these modifiers
-could be used: m,s,i,x,xx,p,a,d,l,u,n.
+The Regex::Object supports two approaches:
+
+=over 4
+
+=item qr// regex passed to constructor, so these modifiers could be used: m,s,i,x,xx,p,a,d,l,u,n.
+
+=item collecting regex result vars from global match expression, (nothing passed to constructor).
+
+=back
 
 More about Perl Regex: L<perlre|https://perldoc.perl.org/perlre>.
 
@@ -104,7 +122,8 @@ More about Perl Regex: L<perlre|https://perldoc.perl.org/perlre>.
 
 =head3 new(regex => $regex)
 
-    my $re = Regex::Object->new(regex  => qr/^\w{3}$/);
+    my $re = Regex::Object->new(regex  => qr/^\w{3}$/); # scoped qr regex
+    my $re = Regex::Object->new; # to work with global match expression
 
 Constructor: accept one parameter - qr// regex and returns new instance.
 
@@ -119,6 +138,13 @@ Returns regex that was passed to constructor earlier.
     my $result = $re->match('foo');
 
 Execute regex matching and returns Regex::Object::Match result DTO.
+
+=head3 collect()
+
+    $string =~ /(\w*)/
+    my $result = $re->collect;
+
+Returns Regex::Object::Match result DTO filled with values from the nearest global match expression.
 
 =head2 Regex::Object::Match METHODS
 
