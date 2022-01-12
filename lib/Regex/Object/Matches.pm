@@ -13,4 +13,16 @@ has matches => (
     required => 1,
 );
 
+sub match_all {
+    my $self = shift;
+
+    return [map { $_->match } @{$self->matches}];
+}
+
+sub captures_all {
+    my $self = shift;
+
+    return [map { $_->captures } @{$self->matches}];
+}
+
 1;
