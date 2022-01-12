@@ -8,7 +8,7 @@ use utf8;
 use Moo;
 use namespace::clean;
 
-has matches => (
+has collection => (
     is       => 'ro',
     required => 1,
 );
@@ -16,13 +16,13 @@ has matches => (
 sub match_all {
     my $self = shift;
 
-    return [map { $_->match } @{$self->matches}];
+    return [map { $_->match } @{$self->collection}];
 }
 
 sub captures_all {
     my $self = shift;
 
-    return [map { $_->captures } @{$self->matches}];
+    return [map { $_->captures } @{$self->colection}];
 }
 
 1;
