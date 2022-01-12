@@ -2,7 +2,7 @@ use strict;
 use warnings qw/FATAL/;
 use utf8;
 
-use Test::Simple tests => 5;
+use Test::Simple tests => 7;
 use Regex::Object;
 
 $|=1;
@@ -64,7 +64,7 @@ ok(!$result,
 );
 
 ## TEST 5
-# Test global matching
+# Test global matching with global regex
 
 $expected = 'John Doe Eric Lide Hans Zimmermann';
 
@@ -73,6 +73,40 @@ while ($expected =~ /(?<name>\w+?) (?<surname>\w+)/g) {
 }
 
 $result = join "\040", @result;
+
+ok($result eq $expected,
+    sprintf('Returns wrong value: %s, expected: %s',
+        $result,
+        $expected,
+    )
+);
+
+## TEST 6
+# Test global matching with scoped regex
+
+$re = Regex::Object->new(
+    regex  => qr/(\w+?) (\w+)/,
+);
+
+$expected = 'John Doe Eric Lide Hans Zimmermann';
+$result = join "\040", @{ $re->match_all($expected)->match_all };
+
+ok($result eq $expected,
+    sprintf('Returns wrong value: %s, expected: %s',
+        $result,
+        $expected,
+    )
+);
+
+## TEST 7
+# Test global matching with scoped regex with modifiers
+
+$re = Regex::Object->new(
+    regex  => qr/([A-Z]+?) ([A-Z]+)/i,
+);
+
+$expected = 'John Doe Eric Lide Hans Zimmermann';
+$result = join "\040", @{ $re->match_all($expected)->match_all };
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
