@@ -10,7 +10,7 @@ use Regex::Object::Match;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '1.10';
+our $VERSION = '1.11';
 
 tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
@@ -27,17 +27,30 @@ sub match {
 }
 
 sub collect {
-    my @captures = map {no strict 'refs'; $$_} 1 .. $#-;
-
     return Regex::Object::Match->new(
         prematch           => $PREMATCH,
         match              => $MATCH,
         postmatch          => $POSTMATCH,
         last_paren_match   => $LAST_PAREN_MATCH,
-        captures           => \@captures,
+        captures           => _collect_captures(),
         named_captures     => { %nc },
         named_captures_all => { %nca },
     );
+}
+
+sub _collect_captures {
+    my @captures;
+
+    # Trick to get @captures the most appropriate to language version way.
+    eval {
+        @captures = @{^CAPTURE}; # This was added in 5.25.7.
+    }
+    or do {
+        no strict 'refs';
+        @captures = map { "$$_" } 1 .. $#-;
+    };
+
+    return \@captures;
 }
 
 1;
@@ -56,7 +69,7 @@ Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
-version 1.10
+version 1.11
 
 =head1 SYNOPSIS
 

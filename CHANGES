@@ -1,3 +1,6 @@
+1.11     2022-01-12 09:00:00-00:00 Europe/Moscow
+       - Implement package sub _collect_captures() with different version strategies to collect captures.
+
 1.10     2022-01-11 14:52:35-04:00 Europe/Moscow
        - Regex::Object constructor regex parameter no longer required
        - Implement Regex::Object->collect method that works with global vars
