@@ -7,6 +7,7 @@ use utf8;
 use English;
 
 use Regex::Object::Match;
+use Regex::Object::Matches;
 use Moo;
 use namespace::clean;
 
@@ -24,6 +25,20 @@ sub match {
 
     $string =~ $self->regex;
     return $self->collect;
+}
+
+sub match_all {
+    my ($self, $string) = @_;
+    my $regex = $self->regex;
+    my @matches;
+
+    while($string =~ /$regex/g) {
+        push @matches, $self->collect;
+    }
+
+    return Regex::Object::Matches->new(
+        matches => \@matches,
+    );
 }
 
 sub collect {
