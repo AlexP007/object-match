@@ -37,7 +37,7 @@ sub match_all {
     }
 
     return Regex::Object::Matches->new(
-        matches => \@matches,
+        collection => \@matches,
     );
 }
 
@@ -128,6 +128,14 @@ version 1.20
         push @matches, $match;
     }
 
+    ######## ---- ########
+    # Global search for scoped regex without while loop
+
+    $re = Regex::Object->new(regex  => qr/([A-Z]+?) ([A-Z]+)/i);
+    my $matches = $re->match_all('John Doe Eric Lide Hans Zimmermann');
+
+    print join "\040", $matches->match_all; # prints John Doe Eric Lide Hans Zimmermann
+
 =head1 DESCRIPTION
 
 This module was created for one certain goal: give you a level
@@ -153,37 +161,44 @@ More about Perl Regex: L<perlre|https://perldoc.perl.org/perlre>.
 
 =head3 new(regex => $regex)
 
+Constructor: accept one optional parameter - qr// regex and returns new instance.
+
+
     my $re = Regex::Object->new(regex  => qr/^\w{3}$/); # scoped qr regex
     my $re = Regex::Object->new; # to work with global match expression
 
-Constructor: accept one optional parameter - qr// regex and returns new instance.
-
 =head3 regex()
-
-    my $regex = $re->regex;
 
 Returns regex that was passed to constructor earlier.
 
-=head3 match($string)
+    my $regex = $re->regex;
 
-    my $result = $re->match('foo');
+=head3 match($string)
 
 Execute regex matching and returns Regex::Object::Match result DTO.
 
+    my $result = $re->match('foo');
+
+=head3 match_all($string)
+
+Execute while loop on regex with g modifier and returns Regex::Object::Matches collection.
+
+    my $matches = $re->match_all('John Doe Eric Lide');
+
 =head3 collect()
+
+Returns Regex::Object::Match result DTO filled with values from the nearest global match expression.
 
     $string =~ /(\w*)/
     my $result = $re->collect;
-
-Returns Regex::Object::Match result DTO filled with values from the nearest global match expression.
 
 =head2 Regex::Object::Match METHODS
 
 =head3 success()
 
-    my $is_success = $result->success;
-
 Returns 1 if match succeeded or '' if not.
+
+    my $is_success = $result->success;
 
 =head3 prematch()
 
@@ -232,6 +247,28 @@ Returns hash ref of the named captures all.
 %- equivalent.
 
     my $names_array_ref = $result->named_captures_all->{name};
+
+=head2 Regex::Object::Matches METHODS
+
+=head3 collection()
+
+Returns array ref with all Regex::Object::Match objects
+
+    my $first_match = $matches->collection->[0];
+
+=head3 match_all()
+
+Return array ref with all matches, i.e $MATCH[]
+
+    my $match_all_array_ref = $matches->match_all;
+
+=head3 captures_all()
+
+Return array ref with all captures
+
+    my $captures_all_array_ref = $matches->captures_all;
+
+=head3
 
 =head1 BUGS AND LIMITATIONS
 
