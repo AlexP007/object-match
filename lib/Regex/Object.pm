@@ -131,7 +131,7 @@ version 1.20
     ######## ---- ########
     # Global search for scoped regex without while loop
 
-    my $re = Regex::Object->new(regex  => qr/([A-Z]+?) ([A-Z]+)/i);
+    my $re      = Regex::Object->new(regex  => qr/([A-Z]+?) ([A-Z]+)/i);
     my $matches = $re->match_all('John Doe Eric Lide Hans Zimmermann');
 
     print join "\040", $matches->match_all; # prints John Doe Eric Lide Hans Zimmermann
@@ -252,19 +252,19 @@ Returns hash ref of the named captures all.
 
 =head3 collection()
 
-Returns array ref with all Regex::Object::Match objects
+Returns array ref with all Regex::Object::Match objects.
 
     my $first_match = $matches->collection->[0];
 
 =head3 match_all()
 
-Return array ref with all matches, i.e $MATCH[]
+Return array ref with all matches, i.e $MATCH[].
 
     my $match_all_array_ref = $matches->match_all;
 
 =head3 captures_all()
 
-Return array ref with all captures
+Return array ref with all captures.
 
     my $captures_all_array_ref = $matches->captures_all;
 
