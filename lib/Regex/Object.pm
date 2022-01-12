@@ -131,14 +131,14 @@ version 1.20
     ######## ---- ########
     # Global search for scoped regex without while loop
 
-    $re = Regex::Object->new(regex  => qr/([A-Z]+?) ([A-Z]+)/i);
+    my $re = Regex::Object->new(regex  => qr/([A-Z]+?) ([A-Z]+)/i);
     my $matches = $re->match_all('John Doe Eric Lide Hans Zimmermann');
 
     print join "\040", $matches->match_all; # prints John Doe Eric Lide Hans Zimmermann
 
 =head1 DESCRIPTION
 
-This module was created for one certain goal: give you a level
+This module was created for one certain goal: give developer a level
 of isolation from perlre global variables.
 
 The Regex::Object supports two approaches:
