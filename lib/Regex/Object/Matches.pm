@@ -22,7 +22,7 @@ sub match_all {
 sub captures_all {
     my $self = shift;
 
-    return [map { $_->captures } @{$self->colection}];
+    return [map { $_->captures } @{$self->collection}];
 }
 
 1;
