@@ -11,7 +11,7 @@ use Regex::Object::Matches;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '1.21';
+our $VERSION = '1.22';
 
 tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
@@ -84,7 +84,7 @@ Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
-version 1.21
+version 1.22
 
 =head1 SYNOPSIS
 
@@ -255,6 +255,12 @@ Returns hash ref of the named captures all.
 Returns array ref with all Regex::Object::Match objects.
 
     my $first_match = $matches->collection->[0];
+
+=head3 count()
+
+Returns length of the collection.
+
+    my $count = $matches->count;
 
 =head3 match_all()
 

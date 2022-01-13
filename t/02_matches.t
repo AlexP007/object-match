@@ -2,7 +2,7 @@ use strict;
 use warnings qw/FATAL/;
 use utf8;
 
-use Test::Simple tests => 9;
+use Test::Simple tests => 11;
 use Regex::Object;
 
 $|=1;
@@ -141,5 +141,40 @@ $result = $re->match('foo')->success;
 ok(!$result,
     sprintf('Returns wrong value: %s, expected: undef',
         $result,
+    )
+);
+
+
+## TEST 10
+# Test global matching with scoped regex: count unsuccessfully
+
+$re = Regex::Object->new(
+    regex  => qr/(\d+?) (\d+)/,
+);
+
+$expected = 0;
+$result = $re->match_all('John Doe Eric Lide')->count;
+
+ok($result == $expected,
+    sprintf('Returns wrong value: %s, expected: %s',
+        $result,
+        $expected,
+    )
+);
+
+## TEST 11
+# Test global matching with scoped regex: count successfully
+
+$re = Regex::Object->new(
+    regex  => qr/(\w+?) (\w+)/,
+);
+
+$expected = 2;
+$result = $re->match_all('John Doe Eric Lide')->count;
+
+ok($result == $expected,
+    sprintf('Returns wrong value: %s, expected: %s',
+        $result,
+        $expected,
     )
 );
