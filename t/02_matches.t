@@ -2,7 +2,7 @@ use strict;
 use warnings qw/FATAL/;
 use utf8;
 
-use Test::Simple tests => 8;
+use Test::Simple tests => 9;
 use Regex::Object;
 
 $|=1;
@@ -118,6 +118,10 @@ ok($result eq $expected,
 ## TEST 8
 # Test global matching with scoped regex with modifiers: captures_all
 
+$re = Regex::Object->new(
+    regex  => qr/([A-Z]+?) ([A-Z]+)/i,
+);
+
 $expected = 'John Doe Eric Lide Hans Zimmermann';
 $result = join "\040", map { join "\040", @$_ } @{ $re->match_all($expected)->captures_all };
 
@@ -125,5 +129,17 @@ ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
         $result,
         $expected,
+    )
+);
+
+## TEST 9
+# Test unsuccessful matching
+
+$re = Regex::Object->new(regex => qr/\d+/);
+$result = $re->match('foo')->success;
+
+ok(!$result,
+    sprintf('Returns wrong value: %s, expected: undef',
+        $result,
     )
 );
