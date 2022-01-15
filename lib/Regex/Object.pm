@@ -1,8 +1,6 @@
 package Regex::Object;
 
 use 5.20.0;
-use strict;
-use warnings qw(FATAL);
 use utf8;
 use English;
 
