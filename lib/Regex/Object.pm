@@ -11,7 +11,7 @@ use Regex::Object::Matches;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '1.22';
+our $VERSION = '1.23';
 
 tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
@@ -84,7 +84,7 @@ Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
-version 1.22
+version 1.23
 
 =head1 SYNOPSIS
 
