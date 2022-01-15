@@ -1,9 +1,14 @@
 package Regex::Object::Match;
 
 use 5.20.0;
+
 use utf8;
+use English;
+use feature qw(signatures);
 
 use Moo;
+
+no warnings qw(experimental::signatures);
 use namespace::clean;
 
 has [qw(prematch match postmatch last_paren_match
@@ -17,8 +22,7 @@ has success => (
     is => 'rwp',
 );
 
-sub BUILD {
-    my $self = shift;
+sub BUILD($self, $args) {
     $self->_set_success(defined $self->match);
 }
 
