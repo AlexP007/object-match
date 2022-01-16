@@ -13,7 +13,7 @@ use Moo;
 no warnings qw(experimental::signatures);
 use namespace::clean;
 
-our $VERSION = '1.23';
+our $VERSION = '1.24';
 
 tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
@@ -83,7 +83,7 @@ Regex::Object - solves problems with global Regex variables side effects.
 
 =head1 VERSION
 
-version 1.23
+version 1.24
 
 =head1 SYNOPSIS
 

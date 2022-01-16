@@ -22,7 +22,7 @@ has success => (
     is => 'rwp',
 );
 
-sub BUILD($self, $args) {
+sub BUILD($self, $) {
     $self->_set_success(defined $self->match);
 }
 

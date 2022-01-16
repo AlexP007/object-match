@@ -20,7 +20,7 @@ has count => (
     is => 'rwp',
 );
 
-sub BUILD($self, $args) {
+sub BUILD($self, $) {
     $self->_set_count(scalar @{$self->collection});
 }
 
