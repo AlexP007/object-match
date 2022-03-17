@@ -2,7 +2,7 @@ use strict;
 use warnings qw/FATAL/;
 use utf8;
 
-use Test::Simple tests => 11;
+use Test::Simple tests => 12;
 use Regex::Object;
 
 $|=1;
@@ -19,7 +19,7 @@ $re = Regex::Object->new(
 # Test match.
 
 $expected = 'regex';
-$result = $re->match('full regex expression')->match;
+$result   = $re->match('full regex expression')->match;
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -32,7 +32,7 @@ ok($result eq $expected,
 # Test prematch.
 
 $expected = 'full ';
-$result = $re->match('full regex expression')->prematch;
+$result   = $re->match('full regex expression')->prematch;
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -45,7 +45,7 @@ ok($result eq $expected,
 # Test postmatch.
 
 $expected = ' expression';
-$result = $re->match('full regex expression')->postmatch;
+$result   = $re->match('full regex expression')->postmatch;
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -89,7 +89,7 @@ $re = Regex::Object->new(
 );
 
 $expected = 'John Doe Eric Lide Hans Zimmermann';
-$result = join "\040", @{ $re->match_all($expected)->match_all };
+$result   = join "\040", @{ $re->match_all($expected)->match_all };
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -106,7 +106,7 @@ $re = Regex::Object->new(
 );
 
 $expected = 'John Doe Eric Lide Hans Zimmermann';
-$result = join "\040", @{ $re->match_all($expected)->match_all };
+$result   = join "\040", @{ $re->match_all($expected)->match_all };
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -123,7 +123,7 @@ $re = Regex::Object->new(
 );
 
 $expected = 'John Doe Eric Lide Hans Zimmermann';
-$result = join "\040", map { join "\040", @$_ } @{ $re->match_all($expected)->captures_all };
+$result   = join "\040", map { join "\040", @$_ } @{ $re->match_all($expected)->captures_all };
 
 ok($result eq $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -135,7 +135,7 @@ ok($result eq $expected,
 ## TEST 9
 # Test unsuccessful matching.
 
-$re = Regex::Object->new(regex => qr/\d+/);
+$re     = Regex::Object->new(regex => qr/\d+/);
 $result = $re->match('foo')->success;
 
 ok(!$result,
@@ -153,7 +153,7 @@ $re = Regex::Object->new(
 );
 
 $expected = 0;
-$result = $re->match_all('John Doe Eric Lide')->count;
+$result   = $re->match_all('John Doe Eric Lide')->count;
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
@@ -170,11 +170,29 @@ $re = Regex::Object->new(
 );
 
 $expected = 2;
-$result = $re->match_all('John Doe Eric Lide')->count;
+$result   = $re->match_all('John Doe Eric Lide')->count;
 
 ok($result == $expected,
     sprintf('Returns wrong value: %s, expected: %s',
         $result,
         $expected,
+    )
+);
+
+## TEST 12
+# Test global match than Regex::Object unmatch to see what's there with $MATH global var.
+
+'test-string' =~ /test-string/;
+
+$re = Regex::Object->new(
+    regex  => qr/nest-string/,
+);
+
+$expected = undef;
+$result   = $re->match('test-string')->match;
+
+ok(defined $expected,
+    sprintf('Returns wrong value: %s, expected: undef',
+        $result,
     )
 );
