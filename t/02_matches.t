@@ -16,7 +16,7 @@ $re = Regex::Object->new(
 );
 
 ## TEST 1
-# Test match
+# Test match.
 
 $expected = 'regex';
 $result = $re->match('full regex expression')->match;
@@ -29,7 +29,7 @@ ok($result eq $expected,
 );
 
 ## TEST 2
-# Test prematch
+# Test prematch.
 
 $expected = 'full ';
 $result = $re->match('full regex expression')->prematch;
@@ -42,7 +42,7 @@ ok($result eq $expected,
 );
 
 ## TEST 3
-# Test postmatch
+# Test postmatch.
 
 $expected = ' expression';
 $result = $re->match('full regex expression')->postmatch;
@@ -55,7 +55,7 @@ ok($result eq $expected,
 );
 
 ## TEST 4
-# Test unmatched
+# Test unmatched.
 
 $result = $re->match('full expression')->match;
 
@@ -64,7 +64,7 @@ ok(!$result,
 );
 
 ## TEST 5
-# Test global matching with global regex
+# Test global matching with global regex.
 
 $expected = 'John Doe Eric Lide Hans Zimmermann';
 
@@ -82,7 +82,7 @@ ok($result eq $expected,
 );
 
 ## TEST 6
-# Test global matching with scoped regex
+# Test global matching with scoped regex.
 
 $re = Regex::Object->new(
     regex  => qr/(\w+?) (\w+)/,
@@ -99,7 +99,7 @@ ok($result eq $expected,
 );
 
 ## TEST 7
-# Test global matching with scoped regex with modifiers: match_all method
+# Test global matching with scoped regex with modifiers: match_all method.
 
 $re = Regex::Object->new(
     regex  => qr/([A-Z]+?) ([A-Z]+)/i,
@@ -116,7 +116,7 @@ ok($result eq $expected,
 );
 
 ## TEST 8
-# Test global matching with scoped regex with modifiers: captures_all
+# Test global matching with scoped regex with modifiers: captures_all.
 
 $re = Regex::Object->new(
     regex  => qr/([A-Z]+?) ([A-Z]+)/i,
@@ -133,7 +133,7 @@ ok($result eq $expected,
 );
 
 ## TEST 9
-# Test unsuccessful matching
+# Test unsuccessful matching.
 
 $re = Regex::Object->new(regex => qr/\d+/);
 $result = $re->match('foo')->success;
@@ -146,7 +146,7 @@ ok(!$result,
 
 
 ## TEST 10
-# Test global matching with scoped regex: count unsuccessfully
+# Test global matching with scoped regex: count unsuccessfully.
 
 $re = Regex::Object->new(
     regex  => qr/(\d+?) (\d+)/,
@@ -163,7 +163,7 @@ ok($result == $expected,
 );
 
 ## TEST 11
-# Test global matching with scoped regex: count successfully
+# Test global matching with scoped regex: count successfully.
 
 $re = Regex::Object->new(
     regex  => qr/(\w+?) (\w+)/,

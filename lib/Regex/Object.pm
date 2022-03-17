@@ -13,7 +13,7 @@ use Moo;
 no warnings qw(experimental::signatures);
 use namespace::clean;
 
-our $VERSION = '1.24';
+our $VERSION = '1.25';
 
 tie my %nc,  "Tie::Hash::NamedCapture";
 tie my %nca, "Tie::Hash::NamedCapture", all => 1;
