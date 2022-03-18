@@ -42,7 +42,7 @@ sub match_all($self, $string) {
     );
 }
 
-sub collect($, $success =  undef) {
+sub collect($, $success = undef) {
     my $match;
 
     if (defined $success) {
