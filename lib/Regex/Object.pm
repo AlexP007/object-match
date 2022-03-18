@@ -134,10 +134,11 @@ version 1.24
     # Works with match regex
 
     my $re = Regex::Object->new;
+    my $success;
     my @matches;
 
-    while ('John Doe Eric Lide Hans Zimmermann' =~ /(?<name>\w+?) (?<surname>\w+)/g) {
-        my $match = $re->collect;
+    while ($success = John Doe Eric Lide Hans Zimmermann' =~ /(?<name>\w+?) (?<surname>\w+)/g) {
+        my $match = $re->collect($success);
         push @matches, $match;
     }
 
@@ -198,12 +199,14 @@ Execute while loop on regex with g modifier and returns Regex::Object::Matches c
 
     my $matches = $re->match_all('John Doe Eric Lide');
 
-=head3 collect()
+=head3 collect($success = undef)
 
 Returns Regex::Object::Match result DTO filled with values from the nearest global match expression.
 
-    $string =~ /(\w*)/
-    my $result = $re->collect;
+    my $success = $string =~ /(\w*)/
+    my $result = $re->collect($success);
+
+ATTENTION!! Always pass $success, otherwise strange behavior is possible, because of built-in $MATCH saving last success.
 
 =head2 Regex::Object::Match METHODS
 
