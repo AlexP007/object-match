@@ -33,3 +33,5 @@ sub captures_all($self) {
 }
 
 1;
+
+__END__
