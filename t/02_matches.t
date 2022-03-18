@@ -191,8 +191,8 @@ $re = Regex::Object->new(
 $expected = undef;
 $result   = $re->match('test-string')->match;
 
-ok(defined $expected,
+ok(!$result,
     sprintf('Returns wrong value: %s, expected: undef',
-        $result,
+        $result || 'undef',
     )
 );

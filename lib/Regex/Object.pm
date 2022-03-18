@@ -23,16 +23,18 @@ has regex => (
 );
 
 sub match($self, $string) {
-    $string =~ $self->regex;
-    return $self->collect;
+    my $success = $string =~ $self->regex;
+
+    return $self->collect($success);
 }
 
 sub match_all($self, $string) {
     my $regex = $self->regex;
+    my $success;
     my @matches;
 
-    while($string =~ /$regex/g) {
-        push @matches, $self->collect;
+    while($success = $string =~ /$regex/g) {
+        push @matches, $self->collect($success);
     }
 
     return Regex::Object::Matches->new(
@@ -40,10 +42,22 @@ sub match_all($self, $string) {
     );
 }
 
-sub collect {
+sub collect($, $success =  undef) {
+    my $match;
+
+    if (defined $success) {
+        # Because of quirk with built-in $MATCH - in has last success match.
+        $match   = $success ? $MATCH : undef;
+    } else {
+        # Okay, you have not passed success, then we have no choice and have to rely on $MATCH.
+        $success = defined $MATCH;
+        $match   = $MATCH;
+    }
+
     return Regex::Object::Match->new(
+        success            => $success,
         prematch           => $PREMATCH,
-        match              => $MATCH,
+        match              => $match,
         postmatch          => $POSTMATCH,
         last_paren_match   => $LAST_PAREN_MATCH,
         captures           => _collect_captures(),
